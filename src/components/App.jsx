@@ -1,44 +1,50 @@
-// import { Component } from 'react';
+import { useState } from 'react'
 import { Section } from './Section/Section.jsx';
 import { FeedbackOptions } from './FeedbackOptions/FeedbackOptions.jsx';
 import { Statistics } from './Statistics/Statistics.jsx';
 import { NotificationMesage } from './Notification/Notification.jsx';
 
-export const App() {
+export const App=()=>{
   const [good, setGood] = useState(0);
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
 
-  LeaveFeedback = option => {
-    this.setState(prevState => {
-      return {
-        [option]: prevState[option] + 1,
-      };
-    });
+const leaveFeedback = option => {
+switch (option) {
+  case 'good':
+    setGood(prev => prev + 1);
+    break;
+  case 'neutral':
+      setNeutral(prev => prev + 1);
+      break;  
+  case 'bad':
+      setBad(prev => prev + 1);
+      break;
+      default:
+        return;
+}
   };
 
   
-  countTotalFeedback =() => {
-    const { good, neutral, bad } = this.state;
-    return good + neutral + bad};
+  const countTotalFeedback =() => {
+      return good + neutral + bad};
     
-  countPositiveFeedbackPercentage =() => {
-    const total= this.countTotalFeedback();
-    const { good } = this.state;
+  const countPositiveFeedbackPercentage =() => {
+    const total= countTotalFeedback();
     return Math.round((good / total) * 100)}
 
   {
 
-  const { good, neutral, bad } = this.state;
-  const total = this.countTotalFeedback();
-  const positivePercentage = this.countPositiveFeedbackPercentage();
+  const options = ['good', 'neutral', 'bad'] ;
+  const total = countTotalFeedback();
+  const positivePercentage = countPositiveFeedbackPercentage();
 
     return (
       <div>
         <Section title="Please leave feedback" />
         <FeedbackOptions
-          options={['good', 'neutral', 'bad']}
-          onLeaveFeedback={this.LeaveFeedback}
+          options={options}
+          onLeaveFeedback={leaveFeedback}
         />
 
         <Section title="Statistics" />
