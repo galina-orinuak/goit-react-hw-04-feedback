@@ -1,15 +1,13 @@
-import { Component } from 'react';
+// import { Component } from 'react';
 import { Section } from './Section/Section.jsx';
 import { FeedbackOptions } from './FeedbackOptions/FeedbackOptions.jsx';
 import { Statistics } from './Statistics/Statistics.jsx';
 import { NotificationMesage } from './Notification/Notification.jsx';
 
-export class App extends Component {
-  state = {
-    good: 0,
-    neutral: 0,
-    bad: 0,
-  };
+export const App() {
+  const [good, setGood] = useState(0);
+  const [neutral, setNeutral] = useState(0);
+  const [bad, setBad] = useState(0);
 
   LeaveFeedback = option => {
     this.setState(prevState => {
@@ -29,7 +27,7 @@ export class App extends Component {
     const { good } = this.state;
     return Math.round((good / total) * 100)}
 
-  render() {
+  {
 
   const { good, neutral, bad } = this.state;
   const total = this.countTotalFeedback();
